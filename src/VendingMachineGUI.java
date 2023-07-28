@@ -89,7 +89,7 @@ class VendingMachineGUI extends JFrame {
 
         private void updateButtonLabel(JButton button, VendingMachineItem item) {
             if (item != null) {
-                button.setText(item.getName() + "\nStock: " + item.getStock() + "/" + item.getMaxStock());
+                button.setText(item.getName() + "\n Stock: " + item.getStock() + "/" + item.getMaxStock());
             }
         }
     }
