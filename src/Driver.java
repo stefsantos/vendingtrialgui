@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class VendingMachineApp {
+public class Driver {
     public static void main(String[] args) {
         int numRows = Integer.parseInt(JOptionPane.showInputDialog("Enter the number of items:"));
 
@@ -11,6 +11,6 @@ public class VendingMachineApp {
 
         final int finalNumRows = numRows; // Declare numRows as final
 
-        SwingUtilities.invokeLater(() -> new VendingMachineGUI(finalNumRows));
+        SwingUtilities.invokeLater(() -> new VendingMachine(finalNumRows));
     }
 }
