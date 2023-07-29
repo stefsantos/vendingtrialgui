@@ -13,7 +13,28 @@ class VendingMachineGUI extends JFrame {
         this.numRows = numRows;
         this.items = new VendingMachineItem[numRows];
 
+        presetItems();
         setupGUI();
+    }
+
+    private void presetItems() {
+        // Define the preset items
+        VendingMachineItem[] presetItems = new VendingMachineItem[10];
+        presetItems[0] = new VendingMachineItem("Roasted Milk Tea", 10, 150);
+        presetItems[1] = new VendingMachineItem("Tiramisu Milk Tea", 10, 200);
+        presetItems[2] = new VendingMachineItem("Lychee Milk Tea", 10, 180);
+        presetItems[3] = new VendingMachineItem("Strawberry Milk Tea", 10, 170);
+        presetItems[4] = new VendingMachineItem("Honeydew Milk Tea", 10, 160);
+        presetItems[5] = new VendingMachineItem("Oolong Milk Tea", 10, 110);
+        presetItems[6] = new VendingMachineItem("Hazelnut Milk Tea", 10, 190);
+        presetItems[7] = new VendingMachineItem("Coffee Milk Tea", 10, 160);
+        presetItems[8] = new VendingMachineItem("Choco-berry Milk Tea", 10, 210);
+        presetItems[9] = new VendingMachineItem("Honeydew Milk Tea", 10, 150);
+
+        // Populate the buttons with the preset items
+        for (int i = 0; i < Math.min(numRows, presetItems.length); i++) {
+            items[i] = presetItems[i];
+        }
     }
 
     private void setupGUI() {
@@ -35,9 +56,20 @@ class VendingMachineGUI extends JFrame {
         buyButton.addActionListener(new BuyActionListener());
         add(buyButton);
 
+        // Update the button labels with the preset items
+        for (int i = 0; i < numRows; i++) {
+            updateButtonLabel((JButton) getContentPane().getComponent(i * 2), items[i]);
+        }
+
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void updateButtonLabel(JButton button, VendingMachineItem item) {
+        if (item != null) {
+            button.setText(item.getName() + "\n Stock: " + item.getStock() + "/" + item.getMaxStock() + "\n Calories: " + item.getCalories());
+        }
     }
 
     private void updateButtons() {
@@ -78,9 +110,17 @@ class VendingMachineGUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String name = JOptionPane.showInputDialog("Enter item name:");
             int maxStock = Integer.parseInt(JOptionPane.showInputDialog("Enter maximum stock:"));
+
+            while (maxStock < 10) {
+                JOptionPane.showMessageDialog(null, "Maximum stock must be at least 10.", "Error", JOptionPane.ERROR_MESSAGE);
+                maxStock = Integer.parseInt(JOptionPane.showInputDialog("Enter maximum stock:"));
+            }
+
+            final int finalmaxStock = maxStock;
+
             int calories = Integer.parseInt(JOptionPane.showInputDialog("Enter calories:"));
 
-            VendingMachineItem item = new VendingMachineItem(name, maxStock, calories);
+            VendingMachineItem item = new VendingMachineItem(name, finalmaxStock, calories);
             item.setStock(0); // Initialize stock to 0 after creating a new VendingMachineItem
             items[row] = item;
 
@@ -89,7 +129,7 @@ class VendingMachineGUI extends JFrame {
 
         private void updateButtonLabel(JButton button, VendingMachineItem item) {
             if (item != null) {
-                button.setText(item.getName() + "\n Stock: " + item.getStock() + "/" + item.getMaxStock());
+                button.setText(item.getName() + "\n Stock: " + item.getStock() + "/" + item.getMaxStock() + "\n Calories: " + item.getCalories());
             }
         }
     }
