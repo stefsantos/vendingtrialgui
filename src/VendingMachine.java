@@ -47,7 +47,7 @@ public class VendingMachine extends JFrame {
 
     private void setupGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Vending Machine");
+        setTitle("Regular Vending Machine");
         setLayout(new GridLayout(numRows + 3, 2)); // +3 for balance label and money insertion buttons
 
         for (int i = 0; i < numRows; i++) {

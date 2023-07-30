@@ -64,7 +64,7 @@ public class MainMenu extends JFrame {
 
     // Method to handle user input for the number of items
     public void promptNumRows() {
-        String input = JOptionPane.showInputDialog("Enter the number of items:");
+        String input = JOptionPane.showInputDialog("Enter the number of items in vending machine(at least 8):");
         try {
             int value = Integer.parseInt(input);
             if (value >= 8) {
