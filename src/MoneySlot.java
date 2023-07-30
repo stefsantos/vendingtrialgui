@@ -12,4 +12,8 @@ class MoneySlot {
     public void insertMoney(double amount) {
         balance += amount;
     }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }
